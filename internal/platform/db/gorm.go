@@ -7,7 +7,6 @@ import (
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
 
-	taskDomain "github.com/elvinlari/docker-golang/internal/task/domain"
 	companyDomain "github.com/elvinlari/docker-golang/internal/company/domain"
 	userDomain "github.com/elvinlari/docker-golang/internal/user/domain"
 	inviteDomain "github.com/elvinlari/docker-golang/internal/invite/domain"
@@ -28,9 +27,6 @@ func Connect() (db *gorm.DB, err error) {
 
 func RunMigration(db *gorm.DB) error {
     // Run migration for domain structs
-    if err := db.AutoMigrate(&taskDomain.Task{}); err != nil {
-        return err
-    }
 	if err := db.AutoMigrate(&companyDomain.Company{}); err != nil {
         return err
     }

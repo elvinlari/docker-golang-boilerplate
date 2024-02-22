@@ -8,8 +8,6 @@ import (
 	"github.com/gin-gonic/gin"
 	log "github.com/sirupsen/logrus"
 
-	taskModel "github.com/elvinlari/docker-golang/internal/task/model"
-	taskHttp "github.com/elvinlari/docker-golang/internal/task/http"
 	companyModel "github.com/elvinlari/docker-golang/internal/company/model"
 	companyHttp "github.com/elvinlari/docker-golang/internal/company/http"
 	userModel "github.com/elvinlari/docker-golang/internal/user/model"
@@ -52,13 +50,6 @@ func NewApp() *App {
 	// Set Gin mode to release
     gin.SetMode(gin.ReleaseMode)
 	router := gin.New()
-
-	// task domain
-	tsDB := &taskModel.TaskService{DB: db}
-	tsHTTP := taskHttp.TaskService{
-		Service: tsDB,
-	}
-	taskHttp.RegisterRoutes(router, &tsHTTP)
 
 	// company domain
 	cmDB := &companyModel.Service{DB: db}
